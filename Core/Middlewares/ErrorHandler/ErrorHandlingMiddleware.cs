@@ -30,12 +30,12 @@ public class ErrorHandlingMiddleware(RequestDelegate next)
                 Detail = e.Message,
                 Type = e.Type
             },
-            _ => new ProblemDetails
+            Exception e => new ProblemDetails
             {
                 Status = StatusCodes.Status500InternalServerError,
                 Title = "Internal Server Error",
-                Detail = "An unexpected error occurred.",
-                Type = "https://example.com/problems/internal-server-error"
+                Detail = e.Message,
+                Type = e.HelpLink
             }
         };
 

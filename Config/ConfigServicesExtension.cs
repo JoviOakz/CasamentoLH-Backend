@@ -5,9 +5,12 @@ namespace CasamentoLH_Backend.Config;
 
 public static partial class ServiceCollectionExtension
 {
-    public static IServiceCollection ConfigEntitiesServices (this IServiceCollection services) 
+    public static IServiceCollection ConfigEntitiesServices(this IServiceCollection services)
     {
+        services.AddAutoMapper(typeof(MappingProfile));
+
         services.AddScoped<IGuestService, GuestService>();
+        services.AddScoped<IGuestGroupService, GuestGroupService>();
         return services;
     }
 }

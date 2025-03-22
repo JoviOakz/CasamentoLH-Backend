@@ -5,5 +5,5 @@ namespace CasamentoLH_Backend.Domain.Services;
 
 public interface IGuestService : IBaseService<Guest>
 {
-    public Task<BaseResponse<IEnumerable<GuestGroupDTO>>> CreateManyGuests(IEnumerable<GuestGroupPayload> payload);
+    public Task<BaseResponse<IEnumerable<GuestGroupDTO>>> CreateManyGuests(IEnumerable<CreateGuestGroupPayload> payload);
 }

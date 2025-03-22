@@ -26,7 +26,7 @@ public class BaseRepository<T>(CasamentoLHContext context) : IBaseRepository<T> 
     public async Task<T> UpdateAsync(T entity)
     {
         var existingEntity = await GetByIdAsync(entity.Id) ?? 
-            throw new NotFoundException($"Entity with ID {entity.Id} not found!");
+            throw new NotFoundException($"Entity with ID {entity.Id} not found.");
 
         existingEntity.UpdatedAt = DateTime.UtcNow;
         _context.Entry(existingEntity).CurrentValues.SetValues(entity);

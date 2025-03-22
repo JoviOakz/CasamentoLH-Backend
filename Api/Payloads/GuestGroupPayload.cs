@@ -2,8 +2,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace CasamentoLH_Backend.Api.Payloads;
 
-public class GuestGroupPayload
+public class CreateGuestGroupPayload
 {
     [Required]
-    public required IEnumerable<GuestPayload> Guests { get; set; }
+    public required IEnumerable<CreateGuestPayload> Guests { get; set; }
 }
