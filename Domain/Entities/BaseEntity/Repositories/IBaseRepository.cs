@@ -4,6 +4,7 @@ namespace CasamentoLH_Backend.Domain.Repositories;
 
 public interface IBaseRepository<T> where T : BaseEntity
 {
+    public T? GetById(Guid id);
     public Task<T?> GetByIdAsync(Guid id);
     public IQueryable<T> GetAll();
     public IQueryable<T> GetAllNoTracking();

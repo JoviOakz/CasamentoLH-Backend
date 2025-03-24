@@ -1,3 +1,4 @@
+using AutoMapper;
 using CasamentoLH_Backend.Api.Payloads;
 using CasamentoLH_Backend.Domain.Models;
 using CasamentoLH_Backend.Domain.Repositories;
@@ -7,16 +8,15 @@ using Microsoft.EntityFrameworkCore;
 namespace CasamentoLH_Backend.Core.Services;
 
 public class GuestService(
-    IBaseRepository<Guest> repository, IGuestGroupRepository guestGroupRepository
-) : BaseService<Guest>(repository), IGuestService
+    IBaseRepository<Guest> repository, IGuestGroupRepository guestGroupRepository, IMapper mapper
+) : BaseService<Guest>(repository, mapper), IGuestService
 {
 
     private readonly IBaseRepository<Guest> _repo = repository;
     private readonly IGuestGroupRepository _groupRepo = guestGroupRepository;
 
-    public async Task<BaseResponse<IEnumerable<GuestGroupDTO>>> CreateManyGuests(IEnumerable<GuestGroupPayload> payload)
+    public async Task<BaseResponse<IEnumerable<GuestGroupDTO>>> CreateManyGuests(IEnumerable<CreateGuestGroupPayload> payload)
     {
-
         HashSet<Guid> groupIds = [];
 
         foreach (var group in payload)

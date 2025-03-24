@@ -11,6 +11,7 @@ public class BaseRepository<T>(CasamentoLHContext context) : IBaseRepository<T> 
     protected readonly CasamentoLHContext _context = context;
     protected readonly DbSet<T> _dbSet = context.Set<T>();
 
+    public T? GetById(Guid id) => _dbSet.Where(e => e.DeletedAt == null).SingleOrDefault(e => e.Id == id);
     public async Task<T?> GetByIdAsync(Guid id) => await _dbSet.Where(e => e.DeletedAt == null).SingleOrDefaultAsync(e => e.Id == id);
     public IQueryable<T> GetAll() => _dbSet.Where(e => e.DeletedAt == null);
     public IQueryable<T> GetAllNoTracking() => _dbSet.Where(e => e.DeletedAt == null).AsNoTracking();
@@ -26,7 +27,7 @@ public class BaseRepository<T>(CasamentoLHContext context) : IBaseRepository<T> 
     public async Task<T> UpdateAsync(T entity)
     {
         var existingEntity = await GetByIdAsync(entity.Id) ?? 
-            throw new NotFoundException($"Entity with ID {entity.Id} not found!");
+            throw new NotFoundException($"Entity with ID {entity.Id} not found.");
 
         existingEntity.UpdatedAt = DateTime.UtcNow;
         _context.Entry(existingEntity).CurrentValues.SetValues(entity);

@@ -11,11 +11,21 @@ namespace CasamentoLH_Backend.Api.Controllers;
 public class GuestController : ControllerBase
 {
     [HttpPost]
+    [Route("many")]
     public async Task<ActionResult<GuestDTO>> CreateManyGuests(
-        [FromServices] IGuestService service, [FromBody] IEnumerable<GuestGroupPayload> payload
+        [FromServices] IGuestService service, [FromBody] IEnumerable<CreateGuestGroupPayload> payload
     )
     {
         var result = await service.CreateManyGuests(payload);
+        return Ok(result);
+    }
+
+    [HttpPost]
+    public async Task<ActionResult<GuestDTO>> Create(
+        [FromServices] IGuestGroupService groupService, [FromBody] CreateGuestGroupPayload payload
+    )
+    {
+        var result = await groupService.Create(payload);
         return Ok(result);
     }
 

@@ -6,4 +6,7 @@ public abstract class BaseEntity
     public readonly DateTime CreatedAt = DateTime.UtcNow;
     public DateTime? UpdatedAt { get; set; } = null;
     public DateTime? DeletedAt { get; set; } = null;
+
+    public virtual BaseDTO DTO => BaseDTO.Map(this);
+
 }
