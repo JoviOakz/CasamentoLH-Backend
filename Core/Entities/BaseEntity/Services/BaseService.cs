@@ -11,7 +11,7 @@ public class BaseService<T>(IBaseRepository<T> repository, IMapper mapper) : IBa
     private readonly IBaseRepository<T> _repo = repository;
     private readonly IMapper _mapper = mapper;
 
-    public async Task<BaseResponse<object>> GetById(Guid id)
+    public async Task<BaseResponse<object>> GetByIdAsync(Guid id)
     {
         var obj = await _repo.GetByIdAsync(id)
             ?? throw new NotFoundException($"Entity with ID {id} not found.");
@@ -28,7 +28,7 @@ public class BaseService<T>(IBaseRepository<T> repository, IMapper mapper) : IBa
         return new BaseResponse<IEnumerable<object>>(
             objs,
             "Objects found!",
-            "Objectos encontrados!"
+            "Objetos encontrados!"
         );
     }
 
@@ -59,7 +59,6 @@ public class BaseService<T>(IBaseRepository<T> repository, IMapper mapper) : IBa
             $"{nameof(T)} atualizado com sucesso!"
         );
     }
-
 
     public async Task Delete(Guid id)
     {

@@ -6,5 +6,5 @@ public class Guest : BaseEntity
     public bool IsConfirmed { get; set; } = false;
     public required GuestGroup GuestGroup { get; set; }
 
-    public override BaseDTO DTO => GuestDTO.Map(this);
+    public override GuestDTO DTO => GuestDTO.Map(this);
 }
